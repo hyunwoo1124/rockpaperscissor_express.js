@@ -9,16 +9,19 @@
 </head>
 <body>
     <!--May have to modify the buttons to use ejs template
-        For now lets leave it like this-->
+        For now lets leave it like this
+    
+    history: ejs 
+    -->
     <h1>Please make your move!</h1>
-    <form action = "/mygame" method ="get">
-        <input type="radio" id="Rock" name ="Rock" value="rock">
+    <form action = "/mygame" method ="post">
+        <input type="radio" id="Rock" name ="choice" value="rock">
         <label for="rock">Rock</label><br>
 
-        <input type="radio" id="Paper" name ="Paper" value="paper">
+        <input type="radio" id="Paper" name ="choice" value="paper">
         <label for="paper">Paper</label><br>
 
-        <input type="radio" id="Scissor" name ="Scissor" value="scissor">
+        <input type="radio" id="Scissor" name ="choice" value="scissor">
         <label for="scissor">Scissor</label><br>
 
         <br>

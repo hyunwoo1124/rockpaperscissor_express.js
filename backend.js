@@ -20,9 +20,9 @@ app.get('/', function(req, res)
 });
 
 app.post('/mygame', function(req, res){
-    console.log("Got data: " + req.body.Rock);
-    console.log("Got data: " + req.body.Paper);
-    console.log("Got data: " + req.body.Scissor);
+    console.log("Got data: " + req.body.choice);
+ //   console.log("Got data: " + req.body.Paper);
+   // console.log("Got data: " + req.body.Scissor);
 
 })
 
