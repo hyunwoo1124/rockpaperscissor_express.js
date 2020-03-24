@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hyunwoo1124/rockpaperscissor_express.js#readme",
   "dependencies": {
+    "ejs": "^3.0.1",
     "express": "^4.17.1"
   }
 }

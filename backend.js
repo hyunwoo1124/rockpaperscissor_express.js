@@ -10,8 +10,8 @@ Newly added -kevin-
 const bodyParser = require("body-parser");
 // Allow extended to change/modify objects (may have to change later depending how our prg goes)
 app.use(bodyParser.urlencoded({extended:true}));
-//app.set('view engine', 'ejs'); lets use this after we get front-end and back-end is connected
 
+app.set('view engine', 'ejs');
 
 // Handles HTML request of the url
 app.get('/', function(req, res)
@@ -43,13 +43,21 @@ app.post('/mygame', function(req, res){
     console.log("Computer uses: " + computerChoice);
 // comparing who wins- jason 3/20
     compare(playersChoice,computerChoice);
-    res.redirect('/');
+    res.render('game', {player: playersChoice, server: computerChoice, playerScore: humanScore, serverScore:computerScore, totalScore: totalGame});
+    
+   // res.redirect('/');
 })
+
 
 app.listen(3000);
 
+let computerScore = 0;
+let humanScore = 0;
+let totalGame = 0;
+
 // compares the choices - jason 3/20
 let compare = function(playersChoice, computerChoice) {
+
     if (playersChoice === computerChoice) {
         console.log("Tie");
 
@@ -57,22 +65,37 @@ let compare = function(playersChoice, computerChoice) {
     else if (playersChoice === 'Rock') {
         if (computerChoice === 'Paper') {
             console.log("Computer Wins");
+            computerScore ++;
+            totalGame++;
         } else {
             console.log("Player wins");
+            humanScore++;
+            totalGame++;
         }
     }
     else if (playersChoice === 'Paper') {
         if (computerChoice === 'Scissors') {
             console.log("Computer Wins");
+            computerScore ++;
+            totalGame++;
         } else {
             console.log("Player wins");
+            humanScore++;
+            totalGame++;
         }
     }
     else if (playersChoice === 'Scissors') {
         if (computerChoice === 'Rock') {
             console.log("Computer Wins");
+            computerScore ++;
+            totalGame++;
         } else {
             console.log("Player wins");
+            humanScore++;
+            totalGame++;
         }
     }
+    console.log("Human: ", humanScore );
+    console.log("Computer: ", computerScore);
+    console.log("Total Score: ", totalGame);
 }
