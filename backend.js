@@ -74,3 +74,4 @@ let compare = function(playersChoice, computerChoice) {
             console.log("Player wins");
         }
     }
+}
