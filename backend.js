@@ -29,7 +29,7 @@ app.post('/mygame', function(req, res){
     let playersChoice = req.body.choice;
 
     // random choice between 0 and 3 to determine computers choice - jason 3/20
-    let computerChoice = math.random(3);
+    let computerChoice = Math.random() * 3;
     if (computerChoice < 1)
     {
         computerChoice = "Rock";
