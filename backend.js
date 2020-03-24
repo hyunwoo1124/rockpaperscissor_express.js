@@ -43,6 +43,8 @@ app.post('/mygame', function(req, res){
     console.log("Computer uses: " + computerChoice);
 // comparing who wins- jason 3/20
     compare(playersChoice,computerChoice);
+    // keivn 3/24
+    // made game.ejs to dynamically generate pages, require work to redirect to the main page again
     res.render('game', {player: playersChoice, server: computerChoice, playerScore: humanScore, serverScore:computerScore, totalScore: totalGame});
     
    // res.redirect('/');
