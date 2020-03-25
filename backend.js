@@ -45,7 +45,7 @@ app.post('/mygame', function(req, res){
     compare(playersChoice,computerChoice);
     // keivn 3/24
     // made game.ejs to dynamically generate pages, require work to redirect to the main page again
-    res.render('game', {player: playersChoice, server: computerChoice, playerScore: humanScore, serverScore:computerScore, totalScore: totalGame});
+    res.render('game', {gameResult: gameResult, player: playersChoice, server: computerChoice, playerScore: humanScore, serverScore:computerScore, totalScore: totalGame, tieScore: tieScore});
     
    // res.redirect('/');
 })
@@ -55,49 +55,54 @@ app.listen(3000);
 
 let computerScore = 0;
 let humanScore = 0;
+let tieScore = 0;
 let totalGame = 0;
+let gameResult = "Tie"
 
 // compares the choices - jason 3/20
 let compare = function(playersChoice, computerChoice) {
 
     if (playersChoice === computerChoice) {
         console.log("Tie");
-
+        tieScore++;
+        gameResult = "Tie!";
     }
     else if (playersChoice === 'Rock') {
         if (computerChoice === 'Paper') {
             console.log("Computer Wins");
-            computerScore ++;
-            totalGame++;
+            computerScore++;
+            gameResult = "You lose!";
         } else {
             console.log("Player wins");
             humanScore++;
-            totalGame++;
+            gameResult = "You win!";
         }
     }
     else if (playersChoice === 'Paper') {
         if (computerChoice === 'Scissors') {
             console.log("Computer Wins");
             computerScore ++;
-            totalGame++;
+            gameResult = "You lose!";
         } else {
             console.log("Player wins");
             humanScore++;
-            totalGame++;
+            gameResult = "You win!";
         }
     }
     else if (playersChoice === 'Scissors') {
         if (computerChoice === 'Rock') {
             console.log("Computer Wins");
             computerScore ++;
-            totalGame++;
+            gameResult = "You lose!";
         } else {
             console.log("Player wins");
             humanScore++;
-            totalGame++;
+            gameResult = "You win!";
         }
     }
+    totalGame++;
     console.log("Human: ", humanScore );
     console.log("Computer: ", computerScore);
+    console.log("Ties: ", tieScore);
     console.log("Total Score: ", totalGame);
 }
