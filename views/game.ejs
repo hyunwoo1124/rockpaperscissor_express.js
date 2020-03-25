@@ -5,17 +5,18 @@
 </head>
 <body>
 
-    <h1>Results...<br><br></h1>
+    <h1><%=gameResult%><br><br></h1>
     
     You picked: <%=player%><br>
     Server picked: <%=server%><br>
     Player wins: <%=playerScore%><br>
     Server wins: <%=serverScore%><br>
+    Ties: <%=tieScore%><br>
     Total Games: <%=totalScore%><br>
-    
-
-    <form action="backend.js">
-        <input type="submit" value="Submit">
+    <br>
+    <form action = "/" method ="get">
+        <br>
+        <input type="submit" value="Play again!">
     </form>
     
 </body>
