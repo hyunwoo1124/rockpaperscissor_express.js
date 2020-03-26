@@ -27,9 +27,10 @@ app.post('/mygame', function(req, res){
     
     // gets the players choice - jason 3/20
     let playersChoice = req.body.choice;
-
+    Object.seal(playersChoice);
     // random choice between 0 and 3 to determine computers choice - jason 3/20
     let computerChoice = Math.floor(Math.random() * 3);
+    Object.seal(computerChoice);
     if (computerChoice == 0)
     {
         computerChoice = "Rock";
@@ -61,7 +62,7 @@ let gameResult = "Tie"
 
 // compares the choices - jason 3/20
 let compare = function(playersChoice, computerChoice) {
-
+    "use strict"
     if (playersChoice === computerChoice) {
         console.log("Tie");
         tieScore++;
