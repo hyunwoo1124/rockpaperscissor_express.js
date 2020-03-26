@@ -21,89 +21,109 @@ app.get('/', function(req, res)
 
 app.post('/mygame', function(req, res){
     console.log("Got data: " + req.body.choice);
- //   console.log("Got data: " + req.body.Paper);
-   // console.log("Got data: " + req.body.Scissor);
-    
-    
+    //   console.log("Got data: " + req.body.Paper);
+    // console.log("Got data: " + req.body.Scissor);
+
+
     // gets the players choice - jason 3/20
     let playersChoice = req.body.choice;
     Object.seal(playersChoice);
-    // random choice between 0 and 3 to determine computers choice - jason 3/20
-    let computerChoice = Math.floor(Math.random() * 3);
-    Object.seal(computerChoice);
-    if (computerChoice == 0)
-    {
-        computerChoice = "Rock";
-    }else if (computerChoice == 1)
-    {
-        computerChoice = "Paper";
-    } else if (computerChoice == 2)
-    {
-        computerChoice = "Scissors";
-    }
-    console.log("Computer uses: " + computerChoice);
-// comparing who wins- jason 3/20
-    compare(playersChoice,computerChoice);
-    // keivn 3/24
+
+    let obj = Object.seal(rps);
+    let rpsObj= new rps();
+    let computer= rpsObj.compChoice();
+
+    rpsObj.compare(playersChoice, computer);
+
+        // keivn 3/24
     // made game.ejs to dynamically generate pages, require work to redirect to the main page again
-    res.render('game', {gameResult: gameResult, player: playersChoice, server: computerChoice, playerScore: humanScore, serverScore:computerScore, totalScore: totalGame, tieScore: tieScore});
-    
-   // res.redirect('/');
+    res.render('game', {gameResult: rpsObj.gameResult, player: playersChoice, server: rpsObj.computerChoice, playerScore: rpsObj.humanScore, serverScore:rpsObj.computerScore, totalScore: rpsObj.totalGame, tieScore: rpsObj.tieScore});
+
+    // res.redirect('/');
 })
 
 
 app.listen(3000);
+const rps = class
+{
+    constructor(computerScore, humanScore, tieScore, totalGame, gameResult, computerChoice) {
 
-let computerScore = 0;
-let humanScore = 0;
-let tieScore = 0;
-let totalGame = 0;
-let gameResult = "Tie"
+        this.computerScore = computerScore = 0;
+        this.humanScore = humanScore = 0;
+        this.tieScore = tieScore = 0;
+        this.totalGame = totalGame = 0;
+        this.gameResult = gameResult;
+        this.computerChoice = computerChoice=0;
+    }
+}
+
+
+    // random choice between 0 and 3 to determine computers choice - jason 3/20
+    rps.prototype.compChoice = function() {
+         this.computerChoice = Math.floor(Math.random() * 3);
+
+
+        if (this.computerChoice === 0) {
+            this.computerChoice = "Rock";
+            return this.computerChoice;
+        } else if (this.computerChoice === 1) {
+            this.computerChoice = "Paper";
+            return this.computerChoice;
+        } else if (this.computerChoice === 2) {
+            this.computerChoice = "Scissors";
+            return this.computerChoice;
+        }
+        console.log("Computer uses: " + this.computerChoice);
+    }
+
+
 
 // compares the choices - jason 3/20
-let compare = function(playersChoice, computerChoice) {
-    "use strict"
+rps.prototype.compare= function(playersChoice, computerChoice)
+{
+
+
     if (playersChoice === computerChoice) {
         console.log("Tie");
-        tieScore++;
-        gameResult = "Tie!";
-    }
-    else if (playersChoice === 'Rock') {
+        this.tieScore++;
+        this.gameResult = "Tie!";
+    } else if (playersChoice === 'Rock') {
         if (computerChoice === 'Paper') {
             console.log("Computer Wins");
-            computerScore++;
-            gameResult = "You lose!";
+            this.computerScore++;
+            this.gameResult = "You lose!";
         } else {
             console.log("Player wins");
-            humanScore++;
-            gameResult = "You win!";
+            this.humanScore++;
+            this.gameResult = "You win!";
         }
-    }
-    else if (playersChoice === 'Paper') {
+    } else if (playersChoice === 'Paper') {
         if (computerChoice === 'Scissors') {
             console.log("Computer Wins");
-            computerScore ++;
-            gameResult = "You lose!";
+            this.computerScore++;
+            this.gameResult = "You lose!";
         } else {
             console.log("Player wins");
-            humanScore++;
-            gameResult = "You win!";
+           this. humanScore++;
+           this.gameResult = "You win!";
         }
-    }
-    else if (playersChoice === 'Scissors') {
+    } else if (playersChoice === 'Scissors') {
         if (computerChoice === 'Rock') {
             console.log("Computer Wins");
-            computerScore ++;
-            gameResult = "You lose!";
+            this.computerScore++;
+            this.gameResult = "You lose!";
         } else {
             console.log("Player wins");
-            humanScore++;
-            gameResult = "You win!";
+            this.humanScore++;
+            this.gameResult = "You win!";
         }
     }
-    totalGame++;
-    console.log("Human: ", humanScore );
-    console.log("Computer: ", computerScore);
-    console.log("Ties: ", tieScore);
-    console.log("Total Score: ", totalGame);
+    this.totalGame++;
+    console.log("Human: ", this.humanScore);
+    console.log("Computer: ", this.computerScore);
+    console.log("Ties: ", this.tieScore);
+    console.log("Total Score: ", this.totalGame);
 }
+
+
+
