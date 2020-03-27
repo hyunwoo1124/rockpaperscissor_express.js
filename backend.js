@@ -1,4 +1,5 @@
-//"use strict" This is only required for objects on the actual rpc game to "seal object game"
+"use strict"
+// This is only required for objects on the actual rpc game to "seal object game"
 const express = require('express');
 const app = express();
 //const server = require('http').createServer(app); dont need to use http since we are using 'express'
@@ -13,37 +14,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.set('view engine', 'ejs');
 
-// Handles HTML request of the url
-app.get('/', function(req, res)
-{
-    res.sendFile(__dirname + '/index.html');
-});
-
-app.post('/mygame', function(req, res){
-    console.log("Got data: " + req.body.choice);
-    //   console.log("Got data: " + req.body.Paper);
-    // console.log("Got data: " + req.body.Scissor);
-
-
-    // gets the players choice - jason 3/20
-    let playersChoice = req.body.choice;
-    Object.seal(playersChoice);
-
-    let obj = Object.seal(rps);
-    let rpsObj= new rps();
-    let computer= rpsObj.compChoice();
-
-    rpsObj.compare(playersChoice, computer);
-
-        // keivn 3/24
-    // made game.ejs to dynamically generate pages, require work to redirect to the main page again
-    res.render('game', {gameResult: rpsObj.gameResult, player: playersChoice, server: rpsObj.computerChoice, playerScore: rpsObj.humanScore, serverScore:rpsObj.computerScore, totalScore: rpsObj.totalGame, tieScore: rpsObj.tieScore});
-
-    // res.redirect('/');
-})
-
-
-app.listen(3000);
 const rps = class
 {
     constructor(computerScore, humanScore, tieScore, totalGame, gameResult, computerChoice) {
@@ -57,24 +27,58 @@ const rps = class
     }
 }
 
+// Handles HTML request of the url
+app.get('/', function(req, res)
+{
+    res.sendFile(__dirname + '/index.html');
+});
 
-    // random choice between 0 and 3 to determine computers choice - jason 3/20
-    rps.prototype.compChoice = function() {
-         this.computerChoice = Math.floor(Math.random() * 3);
+let rpsObj= new rps();
+
+app.post('/mygame', function(req, res){
+    console.log("Got data: " + req.body.choice);
+    //   console.log("Got data: " + req.body.Paper);
+    // console.log("Got data: " + req.body.Scissor);
 
 
-        if (this.computerChoice === 0) {
-            this.computerChoice = "Rock";
-            return this.computerChoice;
-        } else if (this.computerChoice === 1) {
-            this.computerChoice = "Paper";
-            return this.computerChoice;
-        } else if (this.computerChoice === 2) {
-            this.computerChoice = "Scissors";
-            return this.computerChoice;
-        }
-        console.log("Computer uses: " + this.computerChoice);
+    // gets the players choice - jason 3/20
+    let playersChoice = req.body.choice;
+    Object.seal(playersChoice);
+
+   
+    let obj = Object.seal(rps);
+    
+    let computer= rpsObj.compChoice();
+
+    rpsObj.compare(playersChoice, computer);
+
+        // keivn 3/24
+    // made game.ejs to dynamically generate pages, require work to redirect to the main page again
+    res.render('game', {gameResult: rpsObj.gameResult, player: playersChoice, server: rpsObj.computerChoice, playerScore: rpsObj.humanScore, serverScore:rpsObj.computerScore, totalScore: rpsObj.totalGame, tieScore: rpsObj.tieScore});
+
+    // res.redirect('/');
+})
+
+
+app.listen(3000);
+
+
+// random choice between 0 and 3 to determine computers choice - jason 3/20
+rps.prototype.compChoice = function() {
+    this.computerChoice = Math.floor(Math.random() * 3);
+
+    if (this.computerChoice === 0) {
+        this.computerChoice = "Rock";
+        return this.computerChoice;
+    } else if (this.computerChoice === 1) {
+        this.computerChoice = "Paper";
+        return this.computerChoice;
+    } else if (this.computerChoice === 2) {
+        this.computerChoice = "Scissors";
+        return this.computerChoice;
     }
+    console.log("Computer uses: " + this.computerChoice);
+}
 
 
 
@@ -124,6 +128,3 @@ rps.prototype.compare= function(playersChoice, computerChoice)
     console.log("Ties: ", this.tieScore);
     console.log("Total Score: ", this.totalGame);
 }
-
-
-
