@@ -2,10 +2,11 @@
 rockpaperscissor game using express.js and node.js
 
 Authors:
-Austin Thorton   |    austint22@csu.fullerton.edu
-Hyun Woo Kim     |    hyunwoo777@csu.fullerton.edu 
-Jason Eirich     |    Jeirich@csu.fullerton.edu  
-Mike Cheng       |    mikecheng@csu.fullerton.edu 
+
+         Austin Thorton   |    austint22@csu.fullerton.edu
+         Hyun Woo Kim     |    hyunwoo777@csu.fullerton.edu 
+         Jason Eirich     |    Jeirich@csu.fullerton.edu  
+         Mike Cheng       |    mikecheng@csu.fullerton.edu 
          
         
 To execute the program:
