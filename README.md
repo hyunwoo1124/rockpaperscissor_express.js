@@ -11,8 +11,8 @@ Authors:
         
 To execute the program:
 
-      1. Open the Terminal and navigate to the folder containing backend.js
-      2. run the command: node backend.js
+      1. Open the Terminal and navigate to the folder containing rps.js
+      2. run the command: node rps.js
       3. Open a web browser
       4. Search http://localhost:3000 in the URL address bar
       
