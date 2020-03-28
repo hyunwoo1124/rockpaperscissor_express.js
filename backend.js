@@ -14,7 +14,7 @@ const rps = class
 {
     constructor(listen, computerScore, humanScore, tieScore, totalGame, gameResult, computerChoice) 
     {
-        this.listen = 0
+        app.listen(listen);
         this.computerScore = computerScore = 0;
         this.humanScore = humanScore = 0;
         this.tieScore = tieScore = 0;
@@ -47,7 +47,7 @@ rps.prototype.compChoice = function()
 }
 
 // Creating instance of a class rps -> rpsObj
-let rpsObj= new rps(); 
+let rpsObj= new rps(3000); 
 
 
 // function prototype to compare player and computer choice
@@ -138,5 +138,3 @@ app.post('/mygame', function(req, res)
     res.render('game', {gameResult: rpsObj.gameResult, player: playersChoice, server: rpsObj.computerChoice, playerScore: rpsObj.humanScore, serverScore:rpsObj.computerScore, totalScore: rpsObj.totalGame, tieScore: rpsObj.tieScore});
 
 })
-
-app.listen(3000);
